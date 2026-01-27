@@ -1,20 +1,25 @@
 package ourbusinessproject.ourbusinessproject;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.*;
 
 @Entity
+@Table(name = "projects")
 public class Project {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
 
     @NotBlank
+    @Column(name = "title")
     private String title;
 
+    @Column(name = "desc")
     private String description;
 
     public Project(){
