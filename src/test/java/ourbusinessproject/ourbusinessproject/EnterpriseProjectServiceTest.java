@@ -2,10 +2,10 @@ package ourbusinessproject.ourbusinessproject;
 
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -30,10 +30,10 @@ class EnterpriseProjectServiceTest {
     }
 
     @Test
-    @DisplayName("Check if a created project is persisted")
     public void testEntityManagerPersistAProjectWhenANewProjectIsCreated() {
         // when: trying to create a project
-        project = enterpriseProjectService.newProject("a title", "a description");
+        Enterprise enterprise1 = Mockito.mock(Enterprise.class);
+        project = enterpriseProjectService.newProject("a title", "a description", enterprise1);
         // then: the service delegates the entity manager to persist the project
         verify(enterpriseProjectService.getEntityManager()).persist(project);
         // and: the service asks the entity manager to synchronize with the database
@@ -41,7 +41,6 @@ class EnterpriseProjectServiceTest {
     }
 
     @Test
-    @DisplayName("Check if a created enterprise is persisted")
     public void testEntityManagerPersistAnEnterpriseWhenEnterpriseIsSaved() {
         // when: trying to create an enterprise
         enterprise = enterpriseProjectService.newEnterprise(
@@ -57,7 +56,6 @@ class EnterpriseProjectServiceTest {
     }
 
     @Test
-    @DisplayName("Check if the project is found when providing the ID")
     public void testEntityManagerFindAProjectWhenProjectIsSearchedById() {
         // when: trying to save the project
         project = enterpriseProjectService.findProjectById(anId);
@@ -66,7 +64,6 @@ class EnterpriseProjectServiceTest {
     }
 
     @Test
-    @DisplayName("Check if the enterprise is found when providing the ID")
     public void testEntityManagerFindAnEnterpriseWhenEnterpriseIsSearchedById() {
         // when: trying to find an enterprise
         enterprise = enterpriseProjectService.findEnterpriseById(anId);

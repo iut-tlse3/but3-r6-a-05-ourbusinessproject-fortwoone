@@ -1,12 +1,9 @@
 package ourbusinessproject.ourbusinessproject;
 
+import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+
+import java.util.Collection;
 
 @Entity
 @Table(name = "enterprises")
@@ -32,6 +29,9 @@ public class Enterprise {
     @Email
     @Column(name="contact_email")
     private String contactEmail;
+
+    @OneToMany(mappedBy = "enterprise")
+    private Collection<Project> projects;
 
     public Enterprise(){
         name = "";

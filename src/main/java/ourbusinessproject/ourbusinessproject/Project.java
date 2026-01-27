@@ -1,11 +1,6 @@
 package ourbusinessproject.ourbusinessproject;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
 @Entity
@@ -21,6 +16,10 @@ public class Project {
 
     @Column(name = "desc")
     private String description;
+
+    @ManyToOne
+    @NotNull
+    private Enterprise enterprise;
 
     public Project(){
         title = "";
@@ -47,6 +46,10 @@ public class Project {
         return description;
     }
 
+    public Enterprise getEnterprise(){
+        return enterprise;
+    }
+
     /**
      * Sets the project's title.
      * @param newTitle The new title. Cannot be null or empty.
@@ -56,10 +59,14 @@ public class Project {
     }
 
     /**
-     *
+     * Sets the project's description.
      * @param newDesc
      */
     public void setDescription(String newDesc){
         description = newDesc;
+    }
+
+    public void setEnterprise(Enterprise enterprise){
+        this.enterprise = enterprise;
     }
 }
