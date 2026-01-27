@@ -19,12 +19,10 @@ public class Enterprise {
     @Size(min=10)
     private String description;
 
-    @NotNull
-    @Size(min=1)
+    @NotBlank
     private String contactName;
 
-    @NotNull
-    @Size(min=1)
+    @NotBlank
     @Email
     private String contactEmail;
 
@@ -33,6 +31,38 @@ public class Enterprise {
         description = "";
         contactName = "";
         contactEmail = "";
+    }
+
+    /**
+     * Get the enterprise's name.
+     * @return The enterprise's name.
+     */
+    public String getName(){
+        return name;
+    }
+
+    /**
+     * Get the enterprise's description.
+     * @return The enterprise's description.
+     */
+    public String getDescription(){
+        return description;
+    }
+
+    /**
+     * Get the contact name for this enterprise.
+     * @return The contact name for this enterprise.
+     */
+    public String getContactName(){
+        return contactName;
+    }
+
+    /**
+     * Get the contact email for this enterprise.
+     * @return The contact email for this enterprise.
+     */
+    public String getContactEmail(){
+        return contactEmail;
     }
 
     public void setName(String newName){

@@ -12,8 +12,7 @@ public class Project {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
 
-    @NotNull
-    @Size(min=1)
+    @NotBlank
     private String title;
 
     private String description;
@@ -23,10 +22,34 @@ public class Project {
         description = null;
     }
 
-    public void setTitle(@NotNull String newTitle){
+    /**
+     * Get the project's title.
+     * @return A string matching the project's title.
+     */
+    public String getTitle(){
+        return title;
+    }
+
+    /**
+     * Get the project's description.
+     * @return A string matching the project's description.
+     */
+    public String getDescription(){
+        return description;
+    }
+
+    /**
+     * Sets the project's title.
+     * @param newTitle The new title. Cannot be null or empty.
+     */
+    public void setTitle(@NotBlank String newTitle){
         title = newTitle;
     }
 
+    /**
+     *
+     * @param newDesc
+     */
     public void setDescription(String newDesc){
         description = newDesc;
     }
