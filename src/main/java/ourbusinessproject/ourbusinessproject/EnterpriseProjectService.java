@@ -32,6 +32,7 @@ public class EnterpriseProjectService {
         enterprise.setName(name);
         enterprise.setDescription(description);
         enterprise.setContactName(contactName);
+        enterprise.setContactEmail(contactEmail);
         entityManager.persist(enterprise);
         entityManager.flush();
         return enterprise;
