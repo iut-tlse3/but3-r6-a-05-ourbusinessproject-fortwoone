@@ -2,8 +2,12 @@ package ourbusinessproject.ourbusinessproject;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.validation.ConstraintViolationException;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
+import java.util.Set;
 
 @Service
 public class EnterpriseProjectService {
@@ -19,10 +23,14 @@ public class EnterpriseProjectService {
     }
 
     public Project newProject(String title, String description, Enterprise enterprise){
+        if (enterprise == null){
+            throw new ConstraintViolationException("enterprise cannot be null", new HashSet<>());
+        }
         Project project = new Project();
         project.setTitle(title);
         project.setDescription(description);
         project.setEnterprise(enterprise);
+        enterprise.addProject(project);
         entityManager.persist(project);
         entityManager.flush();
         return project;

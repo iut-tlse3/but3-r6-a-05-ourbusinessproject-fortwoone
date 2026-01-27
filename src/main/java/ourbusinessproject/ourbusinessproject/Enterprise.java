@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
 import java.util.Collection;
+import java.util.ArrayList;
 
 @Entity
 @Table(name = "enterprises")
@@ -74,6 +75,17 @@ public class Enterprise {
      */
     public String getContactEmail(){
         return contactEmail;
+    }
+
+    public Collection<Project> getProjects(){
+        return projects;
+    }
+
+    public void addProject(Project project){
+        if (projects == null){
+            projects = new ArrayList<>();
+        }
+        projects.add(project);
     }
 
     public void setName(String newName){

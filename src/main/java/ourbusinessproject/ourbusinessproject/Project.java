@@ -21,11 +21,6 @@ public class Project {
     @NotNull
     private Enterprise enterprise;
 
-    public Project(){
-        title = "";
-        description = null;
-    }
-
     public Long getId(){
         return id;
     }
