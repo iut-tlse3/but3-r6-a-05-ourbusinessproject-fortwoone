@@ -13,7 +13,7 @@ import jakarta.persistence.Id;
 public class Enterprise {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
     @NotNull
     @Size(min=1)
@@ -38,6 +38,10 @@ public class Enterprise {
         description = "";
         contactName = "";
         contactEmail = "";
+    }
+
+    public Long getId(){
+        return id;
     }
 
     /**

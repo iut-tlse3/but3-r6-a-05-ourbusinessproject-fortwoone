@@ -13,7 +13,7 @@ import jakarta.validation.constraints.*;
 public class Project {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private long id;
+    private Long id;
 
     @NotBlank
     @Column(name = "title")
@@ -25,6 +25,10 @@ public class Project {
     public Project(){
         title = "";
         description = null;
+    }
+
+    public Long getId(){
+        return id;
     }
 
     /**
