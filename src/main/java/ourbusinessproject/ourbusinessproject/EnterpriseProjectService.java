@@ -2,12 +2,14 @@ package ourbusinessproject.ourbusinessproject;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.List;
 
 @Service
 public class EnterpriseProjectService {
@@ -42,6 +44,14 @@ public class EnterpriseProjectService {
         entityManager.persist(enterprise);
         entityManager.flush();
         return enterprise;
+    }
+
+    public List<Project> findAllProjects(){
+        TypedQuery<Project> query = entityManager.createQuery(
+            "SELECT p FROM Project p ORDER BY title",
+            Project.class
+        );
+        return query.getResultList();
     }
 
     public Project findProjectById(Long id){
