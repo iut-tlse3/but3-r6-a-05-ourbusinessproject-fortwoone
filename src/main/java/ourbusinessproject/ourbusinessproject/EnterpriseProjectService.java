@@ -3,12 +3,8 @@ package ourbusinessproject.ourbusinessproject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
-import jakarta.validation.ConstraintViolationException;
-import jakarta.validation.constraints.NotNull;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.List;
 
 @Service
