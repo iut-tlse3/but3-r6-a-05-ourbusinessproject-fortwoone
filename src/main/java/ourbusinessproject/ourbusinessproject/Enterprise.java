@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
 import java.util.Collection;
-import java.util.ArrayList;
+import java.util.HashSet;
 
 @Entity
 @Table(name = "enterprises")
@@ -83,7 +83,7 @@ public class Enterprise {
 
     public void addProject(Project project){
         if (projects == null){
-            projects = new ArrayList<>();
+            projects = new HashSet<>();
         }
         projects.add(project);
     }
