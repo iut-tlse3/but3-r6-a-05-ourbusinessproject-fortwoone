@@ -19,6 +19,9 @@ public class InitializationService {
 
     @Transactional
     public void initProjects(){
+        // Si l'on tente d'insérer un projet invalide dans le corps de cette méthode,
+        // aucun des trois projets ne sera sauvegardé. En effet, comme nous effectuons les ajouts
+        // depuis une transaction, toute opération qui échoue entraîne l'annulation de tous les changements demandés.
         e1 = enterpriseProjectService.newEnterprise(
             "Enterprise 1",
             "The first enterprise",
