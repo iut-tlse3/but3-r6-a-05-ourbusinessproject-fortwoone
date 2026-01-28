@@ -23,16 +23,13 @@ public class EnterpriseProjectService {
     }
 
     public Project newProject(String title, String description, Enterprise enterprise){
-        if (enterprise == null){
-            throw new ConstraintViolationException("enterprise cannot be null", new HashSet<>());
-        }
         Project project = new Project();
         project.setTitle(title);
         project.setDescription(description);
         project.setEnterprise(enterprise);
-        enterprise.addProject(project);
         entityManager.persist(project);
         entityManager.flush();
+        enterprise.addProject(project);
         return project;
     }
 
