@@ -50,6 +50,14 @@ public class EnterpriseProjectService {
         return query.getResultList();
     }
 
+    public List<Enterprise> findAllEnterprises(){
+        TypedQuery<Enterprise> query = entityManager.createQuery(
+            "SELECT e FROM Enterprise e JOIN FETCH e.projects",
+            Enterprise.class
+        );
+        return query.getResultList();
+    }
+
     public Project findProjectById(Long id){
         return entityManager.find(Project.class, id);
     }

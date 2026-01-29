@@ -23,10 +23,16 @@ public class ProjectController {
 
     @GetMapping("/api/projects")
     public @ResponseBody List<ReturnedProject> findAllProjectsWithEnterprises(){
-        List<Project> projects = enterpriseProjectService.findAllProjects();
+        List<Enterprise> enterprises = enterpriseProjectService.findAllEnterprises();
         List<ReturnedProject> returned = new ArrayList<>();
 
-        projects.forEach((Project p) -> returned.add(new ReturnedProject(p)));
+        enterprises.forEach(
+            (Enterprise e) -> {
+                e.getProjects().forEach(
+                    (Project p) -> returned.add(new ReturnedProject(p))
+                );
+            }
+        );
 
         return returned;
     }
