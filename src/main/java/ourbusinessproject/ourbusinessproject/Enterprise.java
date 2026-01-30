@@ -1,6 +1,7 @@
 package ourbusinessproject.ourbusinessproject;
 
 import jakarta.persistence.*;
+import jakarta.servlet.http.Part;
 import jakarta.validation.constraints.*;
 
 import java.util.Collection;
@@ -33,6 +34,9 @@ public class Enterprise {
 
     @OneToMany(mappedBy = "enterprise")
     private Collection<Project> projects;
+
+    @OneToMany(mappedBy = "enterprise")
+    private Collection<Partnership> partnerships;
 
     public Enterprise(){
         name = "";
@@ -86,6 +90,13 @@ public class Enterprise {
             projects = new HashSet<>();
         }
         projects.add(project);
+    }
+
+    public void addPartnership(Partnership partnership){
+        if (partnerships == null){
+            partnerships = new HashSet<>();
+        }
+        partnerships.add(partnership);
     }
 
     public void setName(String newName){

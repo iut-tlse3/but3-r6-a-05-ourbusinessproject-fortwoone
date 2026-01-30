@@ -3,6 +3,9 @@ package ourbusinessproject.ourbusinessproject;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
+import java.util.Collection;
+import java.util.HashSet;
+
 @Entity
 @Table(name = "projects")
 public class Project {
@@ -20,6 +23,9 @@ public class Project {
     @ManyToOne
     @NotNull
     private Enterprise enterprise;
+
+    @OneToMany(mappedBy = "project")
+    private Collection<Partnership> partnerships;
 
     public Long getId(){
         return id;
@@ -63,5 +69,12 @@ public class Project {
 
     public void setEnterprise(Enterprise enterprise){
         this.enterprise = enterprise;
+    }
+
+    public void addPartnership(Partnership p){
+        if (partnerships == null){
+            partnerships = new HashSet<>();
+        }
+        partnerships.add(p);
     }
 }

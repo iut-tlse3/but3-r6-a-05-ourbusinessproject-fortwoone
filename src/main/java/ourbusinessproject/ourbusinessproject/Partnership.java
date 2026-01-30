@@ -5,29 +5,28 @@ import jakarta.validation.constraints.NotNull;
 
 import java.util.Date;
 
-//@Entity
-//@Table(name = "partnerships")
+@Entity
+@Table(name = "partnerships")
 public class Partnership {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.AUTO)
-//    private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-//    @NotNull
-//    @Column(name = "creation_date")
+    @NotNull
+    @Column(name = "creation_date")
     private Date creationDate;
 
-//    @NotNull
-//    @Column(name = "enterprise")
+    @NotNull
+    @ManyToOne
     private Enterprise enterprise;
 
-//    @NotNull
-//    @Column(name = "project")
+    @NotNull
+    @ManyToOne
     private Project project;
 
-//    public Long getId(){
-//        return id;
-//    }
-
+    public Long getId(){
+        return id;
+    }
 
     public void setCreationDate(Date newDate){
         creationDate = newDate;
@@ -39,5 +38,17 @@ public class Partnership {
 
     public void setProject(Project p){
         project = p;
+    }
+
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public Enterprise getEnterprise() {
+        return enterprise;
+    }
+
+    public Project getProject() {
+        return project;
     }
 }
