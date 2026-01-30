@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsNull.notNullValue;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -13,8 +15,8 @@ import static org.junit.jupiter.api.Assertions.*;
 public class PartnershipServiceIntegrationTest {
 
     @Autowired private EnterpriseProjectService enterpriseProjectService;
-    @Autowired
-    private PartnershipService partnershipService;
+    @Autowired private PartnershipService partnershipService;
+    @Autowired private InitializationService initializationService;
 
     private Enterprise partnerEnterprise;
     private Project project;
@@ -75,4 +77,31 @@ public class PartnershipServiceIntegrationTest {
 
     }
 
+    @Test
+    public void testPartnershipInitialization() {
+
+        // expect 3 partnerships
+        assertNotNull(initializationService.getPartnershipP1E1WithE2());
+        assertNotNull(initializationService.getPartnershipP1E2WithE1());
+        assertNotNull(initializationService.getPartnershipP2E1WithE2());
+
+        // expect partnership between project1 Enterprise 1 and enterprise 2
+        assertEquals(initializationService.getPartnershipP1E1WithE2().getProject().getId(),
+                initializationService.getProject1E1().getId());
+        assertEquals(initializationService.getPartnershipP1E1WithE2().getEnterprise().getId(),
+                initializationService.getEnterprise2().getId());
+
+        // expect partnership between project1 Enterprise 2 and enterprise 1
+        assertEquals(initializationService.getPartnershipP1E2WithE1().getProject().getId(),
+                initializationService.getProject1E2().getId());
+        assertEquals(initializationService.getPartnershipP1E2WithE1().getEnterprise().getId(),
+                initializationService.getEnterprise1().getId());
+
+        // expect partnership between project2 Enterprise 1 and enterprise 2
+        assertEquals(initializationService.getPartnershipP2E1WithE2().getProject().getId(),
+                initializationService.getProject2E1().getId());
+        assertEquals(initializationService.getPartnershipP2E1WithE2().getEnterprise().getId(),
+                initializationService.getEnterprise2().getId());
+
+    }
 }
