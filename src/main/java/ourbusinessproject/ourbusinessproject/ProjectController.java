@@ -9,12 +9,6 @@ import java.util.ArrayList;
 
 @RestController
 public class ProjectController {
-    public record ReturnedProject(String title, String description, String enterprise){
-        public ReturnedProject(Project p){
-            this(p.getTitle(), p.getDescription(), p.getEnterprise().getName());
-        }
-    }
-
     private EnterpriseProjectService enterpriseProjectService;
 
     public ProjectController(EnterpriseProjectService enterpriseProjectService){
@@ -22,18 +16,7 @@ public class ProjectController {
     }
 
     @GetMapping("/api/projects")
-    public @ResponseBody List<ReturnedProject> findAllProjectsWithEnterprises(){
-        List<Enterprise> enterprises = enterpriseProjectService.findAllEnterprises();
-        List<ReturnedProject> returned = new ArrayList<>();
-
-        enterprises.forEach(
-            (Enterprise e) -> {
-                e.getProjects().forEach(
-                    (Project p) -> returned.add(new ReturnedProject(p))
-                );
-            }
-        );
-
-        return returned;
+    public @ResponseBody List<Project> findAllProjectsWithEnterprises(){
+        return enterpriseProjectService.findAllProjects();
     }
 }

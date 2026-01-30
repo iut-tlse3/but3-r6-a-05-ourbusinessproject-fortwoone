@@ -1,5 +1,6 @@
 package ourbusinessproject.ourbusinessproject;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.servlet.http.Part;
 import jakarta.validation.constraints.*;
@@ -32,9 +33,11 @@ public class Enterprise {
     @Column(name="contact_email")
     private String contactEmail;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "enterprise")
     private Collection<Project> projects;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "enterprise")
     private Collection<Partnership> partnerships;
 

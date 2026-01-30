@@ -1,5 +1,6 @@
 package ourbusinessproject.ourbusinessproject;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
@@ -24,6 +25,7 @@ public class Project {
     @NotNull
     private Enterprise enterprise;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "project")
     private Collection<Partnership> partnerships;
 
